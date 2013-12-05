@@ -4,7 +4,8 @@ as::Common* common = new as::Common();
 
 as::Common::Common() {
     m_running = false;
-    m_deltaTime = 0;
+    m_deltaTime = sf::Time::Zero;
+    m_sprite = NULL;
 }
 
 as::Common::~Common() {
@@ -32,6 +33,11 @@ int as::Common::init() {
         return err;
     }
 
+    lua->doFolder( "data/textures" );
+
+    m_sprite = (as::AnimatedSprite*)resourcemanager->getProcessedResource( "t_foob" );
+    m_sprite->move( 64, 64 );
+
     m_running = true;
     m_deltaClock.restart();
     m_gameClock.restart();
@@ -39,15 +45,20 @@ int as::Common::init() {
 }
 
 void as::Common::tick() {
-    m_deltaTime = (m_deltaClock.restart()).asSeconds();
+    m_deltaTime = m_deltaClock.restart();
     window->tick();
     if ( !window->m_window->isOpen() ) {
         as::printf( "INF Window was closed by something, shutting down...\n" );
         m_running = false;
+        return;
     }
+    window->m_window->clear( sf::Color::Black );
+    window->m_window->draw( *m_sprite );
+    window->m_window->display();
+    m_sprite->tick( m_deltaTime );
 }
 
-float as::Common::getDeltaTime() {
+sf::Time as::Common::getDeltaTime() {
     return m_deltaTime;
 }
 float as::Common::getGameTime() {

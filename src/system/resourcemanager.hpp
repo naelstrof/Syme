@@ -5,11 +5,13 @@
 #include <vector>
 #include <string>
 //#include <typeinfo>
+#include "print.hpp"
 
 namespace as {
 
 class Resource {
 public:
+                    Resource();
                     Resource( std::string name, void* data = NULL );
     std::string     m_name;
     void*           m_data;

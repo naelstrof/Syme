@@ -7,7 +7,7 @@ int lua_cachesprite( lua_State* l ) {
     // The rest of the arguments are animations
     for ( unsigned int i=3; i<1+argcount; i++ ) {
         as::Animation* animation = lua_checkanimation( l, i );
-        sprite->m_animations.push_back( *animation );
+        sprite->addAnimation( animation );
     }
     // The resource manager will clean up anything we allocated for us.
     resourcemanager->addProcessedResource( (as::Resource*)new as::AnimatedSpriteResource( sprite->m_name, sprite ) );

@@ -2,6 +2,7 @@
 #define AS_COMMON_H_
 
 #include <SFML/System/Clock.hpp>
+#include <SFML/System/Time.hpp>
 
 #include "../system/print.hpp"
 #include "../system/filesystem.hpp"
@@ -14,7 +15,7 @@ class Common {
 private:
     sf::Clock   m_deltaClock;
     sf::Clock   m_gameClock;
-    double      m_deltaTime;
+    sf::Time    m_deltaTime;
 public:
                 Common();
                 ~Common();
@@ -22,7 +23,8 @@ public:
     void        tick();
     bool        m_running;
     float       getGameTime();
-    float       getDeltaTime();
+    sf::Time    getDeltaTime();
+    as::AnimatedSprite* m_sprite;
 };
 
 };

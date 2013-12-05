@@ -12,7 +12,7 @@ as::AnimatedSprite::AnimatedSprite( std::string name, std::string filename, bool
     m_currentTime( sf::Time::Zero ) {
 }
 
-as::AnimatedSprite::AnimatedSprite( AnimatedSprite* ref ) {
+as::AnimatedSprite::AnimatedSprite( as::AnimatedSprite* ref ) {
     m_texture = ref->m_texture;
     m_textureFileName = ref->m_textureFileName;
     m_name = ref->m_name;
@@ -22,6 +22,13 @@ as::AnimatedSprite::AnimatedSprite( AnimatedSprite* ref ) {
     m_generatedFrame = ref->m_generatedFrame;
     m_generatedAnimation = ref->m_generatedAnimation;
     m_animations = ref->m_animations;
+}
+
+void as::AnimatedSprite::addAnimation( as::Animation* animation ) {
+    m_animations.push_back( *animation );
+    if ( m_currentAnimation == NULL ) {
+        m_currentAnimation = &( m_animations.at( 0 ) );
+    }
 }
 
 void as::AnimatedSprite::play() {
@@ -69,10 +76,10 @@ void as::AnimatedSprite::updateFrameIndex() {
     m_currentFrame = m_currentTime.asSeconds() * m_currentAnimation->m_fps;
     // Loop through the frames.
     if ( m_currentAnimation->m_loop ) {
-        m_currentFrame = fmod( m_currentFrame, m_currentAnimation->m_frames.size() - 1 );
+        m_currentFrame = fmod( m_currentFrame, m_currentAnimation->m_frames.size());
     } else {
-        if ( m_currentFrame >= m_currentAnimation->m_frames.size() - 1 ) {
-            m_currentFrame = m_currentAnimation->m_frames.size() - 1;
+        if ( m_currentFrame >= m_currentAnimation->m_frames.size() ) {
+            m_currentFrame = m_currentAnimation->m_frames.size();
             m_paused = true;
         }
     }

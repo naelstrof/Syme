@@ -1,10 +1,10 @@
-#ifndef AS_ANIMATEDSPRITE_H_
-#define AS_ANIMATEDSPRITE_H_
+#ifndef AS_RESOURCE_ANIMATEDSPRITE_H_
+#define AS_RESOURCE_ANIMATEDSPRITE_H_
 
 #include <SFML/Graphics/Texture.hpp>
 
-#include "../animatedsprite.hpp"
 #include "../../system/resourcemanager.hpp"
+#include "../animatedsprite.hpp"
 
 namespace as {
 
@@ -12,7 +12,7 @@ class AnimatedSprite;
 
 class AnimatedSpriteResource : public Resource {
 public:
-            AnimatedSpriteResource();
+            AnimatedSpriteResource( std::string name, as::AnimatedSprite* data );
     void    load();
     void*   copy();
     void    remove();
@@ -20,4 +20,4 @@ public:
 
 }
 
-#endif // AS_ANIMATEDSPRITE_H_
+#endif // AS_RESOURCE_ANIMATEDSPRITE_H_

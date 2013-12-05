@@ -1,11 +1,11 @@
 #include "texture.hpp"
 
 as::TextureResource::TextureResource( std::string path, void* data ) {
-    // Just use the default constructor
-    Resource( path, data );
+    m_name = path;
+    m_data = data;
 }
 
-as::TextureResource::load() {
+void as::TextureResource::load() {
     if ( m_data ) {
         return;
     }
@@ -28,7 +28,7 @@ as::TextureResource::load() {
     m_data = texture;
 }
 
-void* as::TextureResource::remove() {
+void as::TextureResource::remove() {
     if ( !m_data ) {
         return;
     }

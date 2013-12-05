@@ -3,6 +3,8 @@
 
 #include <SFML/Graphics/Rect.hpp>
 
+#include "../lua.hpp"
+
 sf::IntRect*    lua_tointrect( lua_State* l, int index );
 sf::IntRect*    lua_checkintrect( lua_State* l, int narg );
 void            lua_pushintrect( lua_State* l, sf::IntRect* intrect );

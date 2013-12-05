@@ -40,7 +40,7 @@ int lua_intrect__newindex( lua_State* l ) {
     return 0;
 }
 
-int luaIntRect__index( lua_State* l ) {
+int lua_intrect__index( lua_State* l ) {
     sf::IntRect* intrect = lua_tointrect( l, 1 );
     if ( intrect == NULL ) {
         return lua->error( l, "attempt to index a NULL IntRect!" );

@@ -21,6 +21,11 @@ void as::Resource::remove() {
     // Do nothing since we're supposed to be polymorphed
 }
 
+void* as::Resource::copy() {
+    // Do nothing since we're supposed to be polymorphed
+    return NULL;
+}
+
 as::ResourceManager::~ResourceManager() {
     for ( unsigned int i=0; i<m_fileResources.size(); i++ ) {
         m_fileResources.at( i )->remove();
@@ -53,11 +58,11 @@ void* as::ResourceManager::getFileResource( std::string path ) {
 void* as::ResourceManager::getProcessedResource( std::string name ) {
     for ( unsigned int i=0; i<m_processedResources.size(); i++ ) {
         // if ( m_fileResources.at( i )->m_name == name && typeid( *( m_fileResources.at( i ) ) ).name() == type ) {
-        if ( m_fileResources.at( i )->m_name == name ) {
+        if ( m_processedResources.at( i )->m_name == name ) {
             // The resource is needed, so actually prepare it right now if it hasn't been prepped already.
-            m_fileResources.at( i )->load();
+            m_processedResources.at( i )->load();
             // Processed resources must be copied to be used.
-            return m_fileResources.at( i )->copy();
+            return m_processedResources.at( i )->copy();
         }
     }
     return NULL;

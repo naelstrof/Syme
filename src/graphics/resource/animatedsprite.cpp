@@ -1,11 +1,14 @@
 #include "animatedsprite.hpp"
 
-as::AnimatedSpriteResource::AnimatedSpriteResource() : as::Resource( std::string name, void* data ) {
+as::AnimatedSpriteResource::AnimatedSpriteResource( std::string name, as::AnimatedSprite* data ) : as::Resource() {
+    m_name = name;
+    m_data = data;
 }
 
 void as::AnimatedSpriteResource::load() {
-    if ( (as::AnimatedSprite*)m_data->m_texture == NULL ) {
-        (as::AnimatedSprite*)m_data->m_texture = (sf::Texture*)resourcemanager->getFileResource( (as::AnimatedSprite*)m_data->m_textureFileName );
+    as::AnimatedSprite* sprite = (as::AnimatedSprite*)m_data;
+    if ( sprite->m_texture == NULL ) {
+        sprite->m_texture = (sf::Texture*)resourcemanager->getFileResource( sprite->m_textureFileName );
     }
 }
 
@@ -17,6 +20,6 @@ void as::AnimatedSpriteResource::remove() {
 }
 
 void* as::AnimatedSpriteResource::copy() {
-    as::AnimatedSprite* sprite = new as::AnimatedSprite( m_data );
+    as::AnimatedSprite* sprite = new as::AnimatedSprite( (as::AnimatedSprite*)m_data );
     return sprite;
 }

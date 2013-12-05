@@ -12,9 +12,9 @@
 #include <SFML/System/Vector2.hpp>
 
 #include "animation.hpp"
-#include "../system/resourcemanager.hpp"
 #include "resource/animatedsprite.hpp"
 #include "resource/texture.hpp"
+#include "../system/resourcemanager.hpp"
 
 namespace as {
 
@@ -28,6 +28,7 @@ public:
     void                        pause();
     void                        stop();
     void                        tick( sf::Time deltaTime );
+    void                        addAnimation( as::Animation* animation );
     virtual void                draw( sf::RenderTarget& target, sf::RenderStates states ) const;
 
     sf::Texture*                m_texture;

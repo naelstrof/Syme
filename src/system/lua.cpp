@@ -15,6 +15,7 @@ as::Lua::~Lua() {
 }
 
 int as::Lua::init() {
+    lua_registerintrect( m_l );
     lua_registeranimation( m_l );
     lua_registeranimatedsprite( m_l );
     return 0;
