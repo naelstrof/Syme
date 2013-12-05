@@ -35,7 +35,7 @@ public:
     int         getBool( lua_State* l, std::string name, bool* ret );
     int         getString( lua_State* l, std::string name, std::string* ret );
     int         getNumber( lua_State* l, std::string name, float* ret );
-    void        error( lua_State* l, std::string message );
+    int         error( lua_State* l, std::string message );
 };
 
 int luaL_loadstring( lua_State* l, const char* s, const char* dir );

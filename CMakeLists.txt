@@ -56,11 +56,18 @@ set( source
      src/game/common.cpp
      src/game/options.cpp
      src/game/config.cpp
+     src/graphics/animatedsprite.cpp
+     src/graphics/resource/animatedsprite.cpp
+     src/graphics/resource/texture.cpp
+     src/graphics/lua/animatedsprite.cpp
+     src/graphics/lua/animation.cpp
+     src/system/lua/intrect.cpp
      src/system/filesystem.cpp
      src/system/fileread.cpp
      src/system/print.cpp
      src/system/lua.cpp
      src/system/window.cpp
+     src/system/resourcemanager.cpp
      src/main.cpp )
 
 # Obtain library paths and make sure they exist.

@@ -6,17 +6,21 @@ as::Animation* lua_toanimation( lua_State* l, int index ) {
 
 as::Animation* lua_checkanimation( lua_State* l, int narg ) {
     as::Animation* foo = lua_toanimation( l, narg );
+    if ( foo == NULL ) {
+        luaL_argerror( l, narg, "attempt to index a NULL Animation!" );
+    }
+    return foo;
 }
 
 void lua_pushanimation( lua_State* l, as::Animation* animation ) {
-    as::Animation* pointer = (is::Animation*)lua_newuserdata( l, sizeof(as::Animation) );
+    as::Animation* pointer = (as::Animation*)lua_newuserdata( l, sizeof(as::Animation) );
     memcpy( pointer, animation, sizeof( as::Animation ) );
     luaL_getmetatable( l, "Animation" );
     lua_setmetatable( l,-2 );
 }
 
 int lua_animation__newindex( lua_State* l ) {
-    is::Animation* animation = lua_toAnimation(l,1);
+    as::Animation* animation = lua_toanimation( l, 1 );
     if ( animation == NULL ) {
         return lua->error( l, "attempt to index a NULL Animation!" );
     }
@@ -39,11 +43,11 @@ int lua_createanimation( lua_State* l ) {
     as::Animation* animation = new as::Animation();
     animation->m_name = luaL_checkstring( l, 1 ); // First argument is name
     animation->m_fps = luaL_checknumber( l, 2 ); // Second argument is fps
-    animation->m_loop = luaL_checkboolean( l, 2 ); // Third argument is if it loops or not
+    animation->m_loop = lua_toboolean( l, 2 ); // Third argument is if it loops or not
     // The rest of the arguments are rectangles
     for ( unsigned int i=4; i<1+argcount; i++ ) {
-        sf::IntRect field = luaL_checkintrect(l,i);
-        animation->m_frames.push_back( field );
+        sf::IntRect* field = lua_checkintrect(l,i);
+        animation->m_frames.push_back( *field );
     }
     lua_pushanimation( l, animation );
     return 1;
@@ -64,7 +68,7 @@ int lua_registeranimation( lua_State* l ) {
     // Clear the stack
     lua_pop(l,1);
 
-    // Create a function that puts a new is::Animation on the stack.
+    // Create a function that puts a new as::Animation on the stack.
     lua_register( l, "Animation", lua_createanimation );
     return 0;
 }

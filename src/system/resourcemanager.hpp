@@ -4,7 +4,7 @@
 
 #include <vector>
 #include <string>
-#include <typeinfo>
+//#include <typeinfo>
 
 namespace as {
 
@@ -30,5 +30,7 @@ public:
 };
 
 };
+
+extern as::ResourceManager* resourcemanager;
 
 #endif // AS_RESOURCEMANAGER_H_

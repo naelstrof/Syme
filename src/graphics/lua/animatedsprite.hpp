@@ -4,10 +4,11 @@
 #define LUA_COMPAT_MODULE
 #include <lua.hpp>
 
+#include "animation.hpp"
 #include "../animation.hpp"
 #include "../animatedsprite.hpp"
-#include "../resource/animatedspriteresource.hpp"
-#include "../resource/textureresource.hpp"
+#include "../resource/animatedsprite.hpp"
+#include "../resource/texture.hpp"
 
 int lua_cachesprite( lua_State* l );
 int lua_registeranimatedsprite( lua_State* l );

@@ -1,4 +1,9 @@
-#include "textureresource.hpp"
+#include "texture.hpp"
+
+as::TextureResource::TextureResource( std::string path, void* data ) {
+    // Just use the default constructor
+    Resource( path, data );
+}
 
 as::TextureResource::load() {
     if ( m_data ) {

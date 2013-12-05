@@ -1,5 +1,5 @@
-#ifndef AS_TEXTURERESOURCE_H_
-#define AS_TEXTURERESOURCE_H_
+#ifndef AS_RESOURCE_TEXTURE_H_
+#define AS_RESOURCE_TEXTURE_H_
 
 #include <SFML/Graphics/Texture.hpp>
 
@@ -8,8 +8,9 @@
 
 namespace as {
 
-class TextureResource : Resource {
+class TextureResource : public Resource {
 public:
+            TextureResource( std::string path, void* data = NULL );
     void    load();
     void*   copy();
     void    remove();
@@ -17,4 +18,4 @@ public:
 
 }
 
-#endif // AS_TEXTURERESOURCE_H_
+#endif // AS_RESOURCE_TEXTURE_H_

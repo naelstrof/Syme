@@ -176,11 +176,12 @@ int as::luaL_loadstring( lua_State* l, const char* s, const char* dir ) {
     return luaL_loadbuffer( l, s, strlen(s), dir );
 }
 
-void as::Lua::error( lua_State* l, std::string message ) {
+int as::Lua::error( lua_State* l, std::string message ) {
     lua_Debug ar1;
     lua_getstack( l, 1, &ar1 );
     lua_getinfo( l, "fl", &ar1 );
     lua_Debug ar2;
     lua_getinfo( l, ">S", &ar2 );
     lua_pushfstring( l, "%s:%d: %s", ar2.short_src, ar1.currentline, message.c_str() );
+    return lua_error( l );
 }

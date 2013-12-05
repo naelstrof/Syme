@@ -11,29 +11,39 @@
 #include <SFML/Graphics/Transformable.hpp>
 #include <SFML/System/Vector2.hpp>
 
+#include "animation.hpp"
+#include "../system/resourcemanager.hpp"
+#include "resource/animatedsprite.hpp"
+#include "resource/texture.hpp"
+
 namespace as {
 
 class AnimatedSprite : public sf::Drawable, public sf::Transformable {
 public:
-                                AnimatedSprite( std::string name, bool paused = false );
+    explicit                    AnimatedSprite( std::string name, std::string filename, bool paused = false );
                                 AnimatedSprite( AnimatedSprite* ref );
-    std::vector<as::Animation>  m_animations;
-    as::Animation*              m_currentAnimation;
-    as::Animation*              m_generatedAnimation;
-    std::string                 m_name;
-    bool                        m_paused;
-    unsigned int                m_currentFrame;
-    unsigned int                m_generatedFrame;
     void                        setFrame( unsigned int frameIndex );
     void                        play( std::string name );
+    void                        play();
     void                        pause();
     void                        stop();
-    sf::Time                    m_currentTime;
+    void                        tick( sf::Time deltaTime );
+    virtual void                draw( sf::RenderTarget& target, sf::RenderStates states ) const;
+
     sf::Texture*                m_texture;
     std::string                 m_textureFileName;
+    std::string                 m_name;
+    bool                        m_paused;
+    as::Animation*              m_currentAnimation;
+    as::Animation*              m_generatedAnimation;
+    unsigned int                m_currentFrame;
+    unsigned int                m_generatedFrame;
+    sf::Time                    m_currentTime;
+    std::vector<as::Animation>  m_animations;
 private:
     void                        updateFrameIndex();
     void                        updateFrame();
+    sf::Vertex m_vertices[4];
 };
 
 };

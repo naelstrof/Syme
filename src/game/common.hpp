@@ -6,6 +6,7 @@
 #include "../system/print.hpp"
 #include "../system/filesystem.hpp"
 #include "../system/window.hpp"
+#include "../system/lua.hpp"
 
 namespace as {
 

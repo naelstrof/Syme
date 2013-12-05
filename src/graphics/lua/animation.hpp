@@ -2,9 +2,9 @@
 #define AS_LUA_ANIMATION_H_
 
 #include <string>
-#define LUA_COMPAT_MODULE
-#include <lua.hpp>
 
+#include "../../system/lua.hpp"
+#include "../../system/lua/intrect.hpp"
 #include "../animation.hpp"
 #include "../animatedsprite.hpp"
 
