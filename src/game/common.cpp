@@ -35,8 +35,10 @@ int as::Common::init() {
 
     lua->doFolder( "data/textures" );
 
-    m_sprite = (as::AnimatedSprite*)resourcemanager->getProcessedResource( "t_foob" );
-    m_sprite->move( 64, 64 );
+    m_text.setFont( *(sf::Font)resourcemanager->getResource( "gui" ) );
+    m_text.setString( "w0w" );
+    m_sprite = (as::AnimatedSprite*)resourcemanager->getResource( "t_foob" );
+    m_sprite->setPosition( window->m_window->getSize().x/2.f, window->m_window->getSize().y/2.f);
 
     m_running = true;
     m_deltaClock.restart();
@@ -54,8 +56,11 @@ void as::Common::tick() {
     }
     window->m_window->clear( sf::Color::Black );
     window->m_window->draw( *m_sprite );
+    window->m_window->draw( m_text );
     window->m_window->display();
     m_sprite->tick( m_deltaTime );
+    m_sprite->rotate( m_deltaTime.asSeconds() * 100 );
+    m_sprite->setScale( m_gameClock.getElapsedTime().asSeconds(), m_gameClock.getElapsedTime().asSeconds() );
 }
 
 sf::Time as::Common::getDeltaTime() {

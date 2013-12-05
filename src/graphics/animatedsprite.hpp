@@ -13,7 +13,6 @@
 
 #include "animation.hpp"
 #include "resource/animatedsprite.hpp"
-#include "resource/texture.hpp"
 #include "../system/resourcemanager.hpp"
 
 namespace as {
@@ -22,6 +21,7 @@ class AnimatedSprite : public sf::Drawable, public sf::Transformable {
 public:
     explicit                    AnimatedSprite( std::string name, std::string filename, bool paused = false );
                                 AnimatedSprite( AnimatedSprite* ref );
+                                ~AnimatedSprite();
     void                        setFrame( unsigned int frameIndex );
     void                        play( std::string name );
     void                        play();

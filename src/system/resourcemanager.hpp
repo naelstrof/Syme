@@ -23,12 +23,9 @@ public:
 class ResourceManager {
 public:
     ~ResourceManager();
-    std::vector<as::Resource*>  m_fileResources;
-    std::vector<as::Resource*>  m_processedResources;
-    void                        addFileResource( Resource* resource );
-    void                        addProcessedResource( Resource* resource );
-    void*                       getFileResource( std::string path );
-    void*                       getProcessedResource( std::string name );
+    std::vector<as::Resource*>  m_resources;
+    void                        addResource( Resource* resource );
+    void*                       getResource( std::string path );
 };
 
 };

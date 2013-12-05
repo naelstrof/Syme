@@ -24,6 +24,12 @@ as::AnimatedSprite::AnimatedSprite( as::AnimatedSprite* ref ) {
     m_animations = ref->m_animations;
 }
 
+as::AnimatedSprite::~AnimatedSprite() {
+    if ( m_texture ) {
+        delete m_texture;
+    }
+}
+
 void as::AnimatedSprite::addAnimation( as::Animation* animation ) {
     m_animations.push_back( *animation );
     if ( m_currentAnimation == NULL ) {
@@ -113,9 +119,6 @@ void as::AnimatedSprite::draw( sf::RenderTarget& target, sf::RenderStates states
     if ( !m_currentAnimation || !m_texture ) {
         return;
     }
-    /* if ( m_texture == NULL ) {
-        m_texture = (sf::Texture*)resourcemanager->getFileResource( m_textureFileName );
-    } */
     states.transform *= getTransform();
     states.texture = m_texture;
     target.draw( m_vertices, 4, sf::Quads, states );

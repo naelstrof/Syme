@@ -25,6 +25,7 @@ public:
     float       getGameTime();
     sf::Time    getDeltaTime();
     as::AnimatedSprite* m_sprite;
+    sf::Text    m_text;
 };
 
 };

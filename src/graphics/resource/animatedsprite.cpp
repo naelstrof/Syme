@@ -8,7 +8,23 @@ as::AnimatedSpriteResource::AnimatedSpriteResource( std::string name, as::Animat
 void as::AnimatedSpriteResource::load() {
     as::AnimatedSprite* sprite = (as::AnimatedSprite*)m_data;
     if ( sprite->m_texture == NULL ) {
-        sprite->m_texture = (sf::Texture*)resourcemanager->getFileResource( sprite->m_textureFileName );
+        as::FileRead file( sprite->m_textureFilePath );
+        if ( !file.good() ) {
+            as::printf( "ERR Couldn't find texture %!\n", m_name );
+            return;
+        }
+        char* data = new char[ file.size() ];
+        file.read( data, file.size() );
+
+        sf::Texture* texture = new sf::Texture();
+        bool success = texture->loadFromMemory( data, file.size() );
+        texture->setSmooth( true );
+        if ( !success ) {
+            as::printf( "ERR SFML failed to load texture %! It will appear black.\n", m_name );
+        }
+
+        delete[] data;
+        sprite->m_texture = texture;
     }
 }
 
