@@ -32,6 +32,6 @@ int lua_print( lua_State* l ) {
 }
 
 int lua_registerprint( lua_State* l ) {
-    lua_register( m_l, "print", lua_print );
+    lua_register( l, "print", lua_print );
     return 0;
 }

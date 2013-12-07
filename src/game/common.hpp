@@ -10,6 +10,7 @@
 #include "../system/filesystem.hpp"
 #include "../system/window.hpp"
 #include "../system/lua.hpp"
+#include "../system/statemachine.hpp"
 
 namespace as {
 

@@ -1,9 +1,10 @@
 #ifndef AS_LUA_INTRECT_H_
 #define AS_LUA_INTRECT_H_
 
-#define LUA_COMPAT_MODULE
-#include <lua.hpp>
 #include <SFML/Graphics/Rect.hpp>
+#include <cstring> // for memcpy
+
+#include "../lua.hpp"
 
 sf::IntRect*    lua_tointrect( lua_State* l, int index );
 sf::IntRect*    lua_checkintrect( lua_State* l, int narg );

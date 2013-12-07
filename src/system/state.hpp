@@ -5,14 +5,16 @@
 #include <string>
 #include <SFML/System/Time.hpp>
 
+#include "lua.hpp"
+
 namespace as {
 
 class State {
 public:
                 State( std::string name, int luaReference );
-    void        tick( sf::Time deltaTime );
-    void        init();
-    void        exit();
+    void        tick( sf::Time deltaTime, lua_State* l );
+    void        init( lua_State* l );
+    void        exit( lua_State* l );
 
     std::string m_name;
     int         m_luaReference;

@@ -5,7 +5,6 @@ as::Common* common = new as::Common();
 as::Common::Common() {
     m_running = false;
     m_deltaTime = sf::Time::Zero;
-    m_sprite = NULL;
 }
 
 as::Common::~Common() {
@@ -36,11 +35,8 @@ int as::Common::init() {
     lua->doFolder( "data/textures" );
     lua->doFolder( "data/fonts" );
 
-    err = statemachine->init();
-    if ( err ) {
-        as::printf( "ERR Failed to initialize a state machine, shutting down...\n" );
-        return err;
-    }
+    // Statemachine errors are not fatal
+    statemachine->init();
 
     m_running = true;
     m_deltaClock.restart();
@@ -51,13 +47,14 @@ int as::Common::init() {
 void as::Common::tick() {
     m_deltaTime = m_deltaClock.restart();
     window->tick();
+    statemachine->tick( m_deltaTime );
     if ( !window->m_window->isOpen() ) {
         as::printf( "INF Window was closed by something, shutting down...\n" );
         m_running = false;
         return;
     }
     window->m_window->clear( sf::Color::Black );
-    scene->draw( window->m_window );
+    //scene->draw( window->m_window );
     window->m_window->display();
 }
 

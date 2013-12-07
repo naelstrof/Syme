@@ -15,6 +15,7 @@ public:
                             StateMachine();
                             ~StateMachine();
     void                    tick( sf::Time deltaTime );
+    int                     init();
     int                     setState( std::string name );
 
     as::State*              m_currentState;
