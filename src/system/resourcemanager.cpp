@@ -27,43 +27,24 @@ void* as::Resource::copy() {
 }
 
 as::ResourceManager::~ResourceManager() {
-    for ( unsigned int i=0; i<m_fileResources.size(); i++ ) {
-        m_fileResources.at( i )->remove();
-    }
-    for ( unsigned int i=0; i<m_processedResources.size(); i++ ) {
-        m_processedResources.at( i )->remove();
+    for ( unsigned int i=0; i<m_resources.size(); i++ ) {
+        m_resources.at( i )->remove();
     }
 }
 
-void as::ResourceManager::addFileResource( Resource* resource ) {
-    m_fileResources.push_back( resource );
-}
-
-void as::ResourceManager::addProcessedResource( Resource* resource ) {
-    m_processedResources.push_back( resource );
+void as::ResourceManager::addResource( Resource* resource ) {
+    m_resources.push_back( resource );
 }
 
 // TODO: Since this will be called a lot, it may be smart to make a binary search based on the first character of the paths.
-void* as::ResourceManager::getFileResource( std::string path ) {
-    for ( unsigned int i=0; i<m_fileResources.size(); i++ ) {
-        if ( m_fileResources.at( i )->m_name == path ) {
+void* as::ResourceManager::getResource( std::string path ) {
+    for ( unsigned int i=0; i<m_resources.size(); i++ ) {
+        if ( m_resources.at( i )->m_name == path ) {
             // The resource is needed, so actually prepare it right now if it hasn't been prepped already.
-            m_fileResources.at( i )->load();
-            return m_fileResources.at( i )->m_data;
+            m_resources.at( i )->load();
+            return m_resources.at( i )->copy();
         }
     }
-    return NULL;
-}
-
-void* as::ResourceManager::getProcessedResource( std::string name ) {
-    for ( unsigned int i=0; i<m_processedResources.size(); i++ ) {
-        // if ( m_fileResources.at( i )->m_name == name && typeid( *( m_fileResources.at( i ) ) ).name() == type ) {
-        if ( m_processedResources.at( i )->m_name == name ) {
-            // The resource is needed, so actually prepare it right now if it hasn't been prepped already.
-            m_processedResources.at( i )->load();
-            // Processed resources must be copied to be used.
-            return m_processedResources.at( i )->copy();
-        }
-    }
+    as::printf( "ERR Couldn't find resource %!\n", path );
     return NULL;
 }

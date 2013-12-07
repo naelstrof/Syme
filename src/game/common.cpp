@@ -34,11 +34,13 @@ int as::Common::init() {
     }
 
     lua->doFolder( "data/textures" );
+    lua->doFolder( "data/fonts" );
 
-    m_text.setFont( *(sf::Font)resourcemanager->getResource( "gui" ) );
-    m_text.setString( "w0w" );
-    m_sprite = (as::AnimatedSprite*)resourcemanager->getResource( "t_foob" );
-    m_sprite->setPosition( window->m_window->getSize().x/2.f, window->m_window->getSize().y/2.f);
+    err = statemachine->init();
+    if ( err ) {
+        as::printf( "ERR Failed to initialize a state machine, shutting down...\n" );
+        return err;
+    }
 
     m_running = true;
     m_deltaClock.restart();
@@ -55,12 +57,8 @@ void as::Common::tick() {
         return;
     }
     window->m_window->clear( sf::Color::Black );
-    window->m_window->draw( *m_sprite );
-    window->m_window->draw( m_text );
+    scene->draw( window->m_window );
     window->m_window->display();
-    m_sprite->tick( m_deltaTime );
-    m_sprite->rotate( m_deltaTime.asSeconds() * 100 );
-    m_sprite->setScale( m_gameClock.getElapsedTime().asSeconds(), m_gameClock.getElapsedTime().asSeconds() );
 }
 
 sf::Time as::Common::getDeltaTime() {

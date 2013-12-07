@@ -8,7 +8,6 @@
 #include "../animation.hpp"
 #include "../animatedsprite.hpp"
 #include "../resource/animatedsprite.hpp"
-#include "../resource/texture.hpp"
 
 int lua_cachesprite( lua_State* l );
 int lua_registeranimatedsprite( lua_State* l );

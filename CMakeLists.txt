@@ -58,15 +58,19 @@ set( source
      src/game/config.cpp
      src/graphics/animatedsprite.cpp
      src/graphics/resource/animatedsprite.cpp
-     src/graphics/resource/texture.cpp
+     src/graphics/resource/font.cpp
      src/graphics/lua/animatedsprite.cpp
      src/graphics/lua/animation.cpp
+     src/graphics/lua/font.cpp
      src/system/lua/intrect.cpp
+     src/system/lua/print.cpp
      src/system/filesystem.cpp
      src/system/fileread.cpp
      src/system/print.cpp
      src/system/lua.cpp
      src/system/window.cpp
+     src/system/state.cpp
+     src/system/statemachine.cpp
      src/system/resourcemanager.cpp
      src/main.cpp )
 

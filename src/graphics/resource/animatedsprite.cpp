@@ -8,7 +8,7 @@ as::AnimatedSpriteResource::AnimatedSpriteResource( std::string name, as::Animat
 void as::AnimatedSpriteResource::load() {
     as::AnimatedSprite* sprite = (as::AnimatedSprite*)m_data;
     if ( sprite->m_texture == NULL ) {
-        as::FileRead file( sprite->m_textureFilePath );
+        as::FileRead file( sprite->m_textureFileName );
         if ( !file.good() ) {
             as::printf( "ERR Couldn't find texture %!\n", m_name );
             return;

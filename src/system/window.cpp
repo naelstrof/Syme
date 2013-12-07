@@ -81,10 +81,9 @@ void as::Window::tick() {
                 m_window->close();
                 break;
             }
-            //case sf::Event::Resized: {
-                //glViewport( 0, 0, event.size.width, event.size.height );
-                //break;
-            //}
+            case sf::Event::Resized: {
+                break;
+            }
             //case sf::Event::LostFocus: {
                 //m_focus = false;
                 //break;

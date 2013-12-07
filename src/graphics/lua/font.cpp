@@ -9,6 +9,15 @@ int lua_cachefont( lua_State* l ) {
 }
 
 int lua_registerfont( lua_State* l ) {
-    lua_register( l, "CacheFont", lua_cachefont );
+    lua_getglobal( l, "Resource" );
+    if ( lua_isnil( l, -1 ) ) {
+        lua_newtable( l );
+        lua_setglobal( l, "Resource" );
+        lua_getglobal( l, "Resource" );
+    }
+    //lua_register( l, "cacheSprite", lua_cachesprite );
+    lua_pushcfunction( l, lua_cachefont );
+    lua_setfield( l, -2, "cacheFont" );
+    lua_pop( l, 1 );
     return 0;
 }

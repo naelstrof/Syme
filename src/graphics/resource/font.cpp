@@ -1,30 +1,38 @@
 #include "font.hpp"
 
-as::FontResource::FontResource( std::string name, std::string path, void* data ) {
+as::FontResource::FontResource( std::string name, std::string path, void* data ) : Resource() {
     m_name = name;
     m_path = path;
     m_data = data;
+    m_filedata = NULL;
+}
+
+as::FontResource::~FontResource() {
+    if ( m_filedata ) {
+        delete[] m_filedata;
+    }
 }
 
 void as::FontResource::load() {
     if ( m_data ) {
         return;
     }
-    as::FileRead file( m_name );
+    as::FileRead file( m_path );
     if ( !file.good() ) {
-        as::printf( "ERR Couldn't find font %!\n", m_name );
+        as::printf( "ERR Couldn't find font %!\n", m_path );
         return;
     }
-    char* data = new char[ file.size() ];
-    file.read( data, file.size() );
+    m_filedata = new char[ file.size() ];
+    file.read( m_filedata, file.size() );
 
     sf::Font* font = new sf::Font();
-    bool success = font->loadFromMemory( data, file.size() );
+    bool success = font->loadFromMemory( m_filedata, file.size() );
     if ( !success ) {
-        as::printf( "ERR SFML failed to load font %!\n", m_name );
+        as::printf( "ERR SFML failed to load font %!\n", m_path );
     }
 
-    delete[] data;
+    //Can't delete until its no longer needed.
+    //delete[] m_filedata;
     m_data = font;
 }
 

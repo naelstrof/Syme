@@ -12,6 +12,10 @@
 
 #include "../graphics/lua/animation.hpp"
 #include "../graphics/lua/animatedsprite.hpp"
+#include "../graphics/lua/font.hpp"
+
+#include "lua/print.hpp"
+#include "lua/intrect.hpp"
 
 // Here we define our own lua dostring function that properly registers file location for error messages.
 #define luaL_asdostring( l, s, n ) \

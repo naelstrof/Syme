@@ -3,6 +3,8 @@
 
 #include <SFML/System/Clock.hpp>
 #include <SFML/System/Time.hpp>
+#include <SFML/Graphics/Font.hpp>
+#include <SFML/Graphics/Text.hpp>
 
 #include "../system/print.hpp"
 #include "../system/filesystem.hpp"
@@ -24,8 +26,6 @@ public:
     bool        m_running;
     float       getGameTime();
     sf::Time    getDeltaTime();
-    as::AnimatedSprite* m_sprite;
-    sf::Text    m_text;
 };
 
 };

@@ -4,6 +4,7 @@
 #include <SFML/Graphics/Texture.hpp>
 
 #include "../../system/resourcemanager.hpp"
+#include "../../system/filesystem.hpp"
 #include "../animatedsprite.hpp"
 
 namespace as {

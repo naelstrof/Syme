@@ -12,9 +12,11 @@ class FontResource : public Resource {
 public:
     std::string     m_path;
                     FontResource( std::string name, std::string path, void* data = NULL );
+                    ~FontResource();
     void            load();
     void*           copy();
     void            remove();
+    char*           m_filedata;
 };
 
 }

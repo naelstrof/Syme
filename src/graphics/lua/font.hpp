@@ -5,7 +5,6 @@
 #include <lua.hpp>
 
 #include "animation.hpp"
-#include "../font.hpp"
 #include "../resource/font.hpp"
 
 int lua_cachefont( lua_State* l );
