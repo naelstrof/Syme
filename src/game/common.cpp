@@ -53,9 +53,7 @@ void as::Common::tick() {
         m_running = false;
         return;
     }
-    window->m_window->clear( sf::Color::Black );
-    //scene->draw( window->m_window );
-    window->m_window->display();
+    scene->draw();
 }
 
 sf::Time as::Common::getDeltaTime() {

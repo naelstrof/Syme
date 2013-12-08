@@ -14,10 +14,11 @@
 #include "animation.hpp"
 #include "resource/animatedsprite.hpp"
 #include "../system/resourcemanager.hpp"
+#include "tickable.hpp"
 
 namespace as {
 
-class AnimatedSprite : public sf::Drawable, public sf::Transformable {
+class AnimatedSprite : public sf::Drawable, public sf::Transformable, as::Tickable {
 public:
     explicit                    AnimatedSprite( std::string name, std::string filename, bool paused = false );
                                 AnimatedSprite( AnimatedSprite* ref );

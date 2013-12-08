@@ -11,6 +11,7 @@
 #include "../system/window.hpp"
 #include "../system/lua.hpp"
 #include "../system/statemachine.hpp"
+#include "../graphics/scene.hpp"
 
 namespace as {
 

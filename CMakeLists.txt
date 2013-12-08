@@ -57,12 +57,15 @@ set( source
      src/game/options.cpp
      src/game/config.cpp
      src/graphics/animatedsprite.cpp
+     src/graphics/scene.cpp
+     src/graphics/node.cpp
      src/graphics/resource/animatedsprite.cpp
      src/graphics/resource/font.cpp
      src/graphics/lua/animatedsprite.cpp
      src/graphics/lua/animation.cpp
      src/graphics/lua/font.cpp
      src/system/lua/intrect.cpp
+     src/system/lua/vector.cpp
      src/system/lua/print.cpp
      src/system/filesystem.cpp
      src/system/fileread.cpp
