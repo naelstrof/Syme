@@ -18,7 +18,7 @@
 
 namespace as {
 
-class AnimatedSprite : public sf::Drawable, public sf::Transformable, as::Tickable {
+class AnimatedSprite : public sf::Drawable, public sf::Transformable, public as::Tickable {
 public:
     explicit                    AnimatedSprite( std::string name, std::string filename, bool paused = false );
                                 AnimatedSprite( AnimatedSprite* ref );
@@ -28,7 +28,7 @@ public:
     void                        play();
     void                        pause();
     void                        stop();
-    void                        tick( sf::Time deltaTime );
+    virtual void                tick( sf::Time deltaTime );
     void                        addAnimation( as::Animation* animation );
     virtual void                draw( sf::RenderTarget& target, sf::RenderStates states ) const;
 

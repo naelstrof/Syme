@@ -6,6 +6,7 @@
 #include <SFML/Graphics/Drawable.hpp>
 #include <SFML/Graphics/Transformable.hpp>
 #include "tickable.hpp"
+#include "animatedsprite.hpp"
 #include "../system/window.hpp"
 
 namespace as {
@@ -14,14 +15,10 @@ class Scene {
 public:
     void                            draw() const;
     void                            tick( sf::Time deltaTime );
-    void                            addTickable( as::Tickable* tickable );
-    void                            removeTickable( as::Tickable* tickable );
-    void                            addDrawable( sf::Drawable* drawable );
-    void                            removeDrawable( sf::Drawable* drawable );
-    void                            addLight( sf::Drawable* light );
+    void                            add( as::AnimatedSprite* object );
+    void                            remove( void* object );
     std::vector< as::Tickable* >    m_tickables;
     std::vector< sf::Drawable* >    m_drawables;
-    std::vector< sf::Drawable* >    m_lights;
 };
 
 };

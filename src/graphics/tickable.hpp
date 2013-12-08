@@ -7,7 +7,7 @@ namespace as {
 
 class Tickable {
 public:
-    virtual void tick( sf::Time deltaTime );
+    virtual void tick( sf::Time deltatime ) = 0;
 };
 
 };

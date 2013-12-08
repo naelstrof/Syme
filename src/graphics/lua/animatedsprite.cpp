@@ -1,7 +1,7 @@
 #include "animatedsprite.hpp"
 
 as::AnimatedSprite* lua_toanimatedsprite( lua_State* l, int index ) {
-    return (as::AnimatedSprite*)luaL_checkudata( l, index, "AnimatedSprite" );
+    return *( (as::AnimatedSprite**)luaL_checkudata( l, index, "AnimatedSprite" ) );
 }
 
 as::AnimatedSprite* lua_checkanimatedsprite( lua_State* l, int narg ) {
@@ -13,8 +13,9 @@ as::AnimatedSprite* lua_checkanimatedsprite( lua_State* l, int narg ) {
 }
 
 void lua_pushanimatedsprite( lua_State* l, as::AnimatedSprite* animatedsprite ) {
-    as::AnimatedSprite* pointer = (as::AnimatedSprite*)lua_newuserdata( l, sizeof(as::AnimatedSprite) );
-    memcpy( pointer, animatedsprite, sizeof( as::AnimatedSprite ) );
+    // We only need lua to keep track of the actual pointer, since we handle the pointer inside of scene.
+    as::AnimatedSprite** pointer = (as::AnimatedSprite**)lua_newuserdata( l, sizeof(as::AnimatedSprite*) );
+    *pointer = animatedsprite;
     luaL_getmetatable( l, "AnimatedSprite" );
     lua_setmetatable( l,-2 );
 }
@@ -45,7 +46,7 @@ int lua_animatedsprite__gc( lua_State* l ) {
     if ( animatedsprite == NULL ) {
         return lua->error( l, "attempt to index a NULL AnimatedSprite!" );
     }
-    scene->removeDrawable( animatedsprite );
+    scene->remove( animatedsprite );
     delete animatedsprite;
     return 0;
 }
@@ -108,7 +109,8 @@ int lua_animatedsprite_move( lua_State* l ) {
 int lua_createanimatedsprite( lua_State* l ) {
     // ResourceManager will copy an animated sprite for us.
     as::AnimatedSprite* animatedsprite = (as::AnimatedSprite*)resourcemanager->getResource( luaL_checkstring( l, 1 ) );
-    scene->addDrawable( animatedsprite );
+    // Add it to the scene and make sure that the scene ticks it for us.
+    scene->add( animatedsprite );
     lua_pushanimatedsprite( l, animatedsprite );
     return 1;
 }
@@ -134,6 +136,7 @@ int lua_registeranimatedsprite( lua_State* l ) {
         { "__newindex", lua_animatedsprite__newindex },
         { "__index", lua_animatedsprite__index },
         { "__gc", lua_animatedsprite__gc },
+        { "remove", lua_animatedsprite__gc },
         { "getPos", lua_animatedsprite_getPos },
         { "setPos", lua_animatedsprite_setPos },
         { "move", lua_animatedsprite_move },

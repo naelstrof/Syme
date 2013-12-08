@@ -21,7 +21,7 @@ void as::State::tick( sf::Time deltaTime, lua_State* l ) {
     // Push self to the function so we can refer to ourself.
     lua_rawgeti( l, LUA_REGISTRYINDEX, m_luaReference );
     // First argument is dt as a number.
-    lua_pushnumber( l, deltaTime.asSeconds() );
+    lua_pushtime( l, deltaTime );
     // Call the function.
     lua->call( l, 2, 0 );
     lua_pop( l, 1 );
