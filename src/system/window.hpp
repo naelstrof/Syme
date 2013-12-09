@@ -15,6 +15,7 @@ private:
     sf::VideoMode       m_mode;
 public:
                         Window();
+                        ~Window();
     std::string         m_name;
     bool                m_fullscreen;
     int                 m_videoMode;

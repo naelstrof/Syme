@@ -7,12 +7,6 @@ as::Common::Common() {
     m_deltaTime = sf::Time::Zero;
 }
 
-as::Common::~Common() {
-    delete filesystem;
-    delete window;
-    delete lua;
-}
-
 int as::Common::init() {
     int err = filesystem->init();
     if ( err ) {

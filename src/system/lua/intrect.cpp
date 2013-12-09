@@ -12,9 +12,9 @@ sf::IntRect* lua_checkintrect( lua_State* l, int narg ) {
     return foo;
 }
 
-void lua_pushintrect( lua_State* l, sf::IntRect intrect ) {
+void lua_pushintrect( lua_State* l, sf::IntRect& intrect ) {
     sf::IntRect* pointer = (sf::IntRect*)lua_newuserdata( l, sizeof(sf::IntRect) );
-    memcpy( pointer, &intrect, sizeof( sf::IntRect ) );
+    *pointer = intrect;
     luaL_getmetatable( l, "IntRect" );
     lua_setmetatable( l,-2 );
 }
@@ -69,11 +69,14 @@ int lua_intrect__index( lua_State* l ) {
 }
 
 int lua_createintrect( lua_State* l ) {
-    sf::IntRect intrect = sf::IntRect( luaL_checknumber( l, 1 ),
-                                       luaL_checknumber( l, 2 ),
-                                       luaL_checknumber( l, 3 ),
-                                       luaL_checknumber( l, 4 ) );
-    lua_pushintrect( l, intrect );
+    sf::IntRect* intrect = (sf::IntRect*)lua_newuserdata( l, sizeof(sf::IntRect) );
+    luaL_getmetatable( l, "IntRect" );
+    lua_setmetatable( l,-2 );
+
+    intrect->left = luaL_checknumber( l, 1 );
+    intrect->top = luaL_checknumber( l, 2 );
+    intrect->width = luaL_checknumber( l, 3 );
+    intrect->height = luaL_checknumber( l, 4 );
     return 1;
 }
 

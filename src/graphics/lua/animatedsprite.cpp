@@ -84,7 +84,7 @@ int lua_animatedsprite_getPos( lua_State* l ) {
     if ( animatedsprite == NULL ) {
         return lua->error( l, "attempt to index a NULL AnimatedSprite!" );
     }
-    lua_pushvector( l, (sf::Vector2f*)&animatedsprite->getPosition() );
+    lua_pushvector( l, (sf::Vector2f&)animatedsprite->getPosition() );
     return 1;
 }
 

@@ -15,7 +15,7 @@ int                     lua_cachesprite( lua_State* l );
 
 as::AnimatedSprite*     lua_toanimatedsprite( lua_State* l, int index );
 as::AnimatedSprite*     lua_checkanimatedsprite( lua_State* l, int narg );
-void                    lua_pushanimatedsprite( lua_State* l, sf::IntRect* animatedsprite );
+void                    lua_pushanimatedsprite( lua_State* l, as::AnimatedSprite* animatedsprite );
 int                     lua_animatedsprite__newindex( lua_State* l );
 int                     lua_animatedsprite__index( lua_State* l );
 int                     lua_animatedsprite__gc( lua_State* l );

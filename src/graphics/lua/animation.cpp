@@ -1,7 +1,7 @@
 #include "animation.hpp"
 
 as::Animation* lua_toanimation( lua_State* l, int index ) {
-    return (as::Animation*)luaL_checkudata( l, index, "Animation" );
+    return *(as::Animation**)luaL_checkudata( l, index, "Animation" );
 }
 
 as::Animation* lua_checkanimation( lua_State* l, int narg ) {
@@ -13,10 +13,18 @@ as::Animation* lua_checkanimation( lua_State* l, int narg ) {
 }
 
 void lua_pushanimation( lua_State* l, as::Animation* animation ) {
-    as::Animation* pointer = (as::Animation*)lua_newuserdata( l, sizeof(as::Animation) );
-    memcpy( pointer, animation, sizeof( as::Animation ) );
+    as::Animation** pointer = (as::Animation**)lua_newuserdata( l, sizeof(as::Animation*) );
+    *pointer = animation;
     luaL_getmetatable( l, "Animation" );
-    lua_setmetatable( l,-2 );
+    lua_setmetatable( l, -2 );
+}
+
+int lua_animation__gc( lua_State* l ) {
+    as::Animation* animation = lua_toanimation( l, 1 );
+    if ( animation ) {
+        delete animation;
+    }
+    return 0;
 }
 
 int lua_animation__newindex( lua_State* l ) {
@@ -40,14 +48,11 @@ int lua_animation__newindex( lua_State* l ) {
 
 int lua_createanimation( lua_State* l ) {
     unsigned int argcount = lua_gettop( l );
-    as::Animation* animation = new as::Animation();
-    animation->m_name = luaL_checkstring( l, 1 ); // First argument is name
-    animation->m_fps = luaL_checknumber( l, 2 ); // Second argument is fps
-    animation->m_loop = lua_toboolean( l, 2 ); // Third argument is if it loops or not
+    as::Animation* animation = new as::Animation( luaL_checkstring( l, 1 ), luaL_checknumber( l, 2 ), lua_toboolean( l, 3 ) );
     // The rest of the arguments are rectangles
     for ( unsigned int i=4; i<1+argcount; i++ ) {
-        sf::IntRect* field = lua_checkintrect(l,i);
-        animation->m_frames.push_back( *field );
+        sf::IntRect* field = lua_checkintrect( l, i );
+        animation->addFrame( *field );
     }
     lua_pushanimation( l, animation );
     return 1;
@@ -59,6 +64,7 @@ int lua_registeranimation( lua_State* l ) {
     // Register its new index function
     static const luaL_Reg animationLib[] {
         { "__newindex", lua_animation__newindex },
+        { "__gc", lua_animation__gc },
         { NULL, NULL }
     };
     luaL_register( l, NULL, animationLib );

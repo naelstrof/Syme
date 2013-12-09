@@ -14,6 +14,7 @@ class AnimatedSprite;
 class AnimatedSpriteResource : public Resource {
 public:
             AnimatedSpriteResource( std::string name, as::AnimatedSprite* data );
+            ~AnimatedSpriteResource();
     void    load();
     void*   copy();
     void    remove();

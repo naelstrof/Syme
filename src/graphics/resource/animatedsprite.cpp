@@ -5,6 +5,17 @@ as::AnimatedSpriteResource::AnimatedSpriteResource( std::string name, as::Animat
     m_data = data;
 }
 
+as::AnimatedSpriteResource::~AnimatedSpriteResource() {
+    as::AnimatedSprite* sprite = (as::AnimatedSprite*)m_data;
+    if ( !sprite ) {
+        return;
+    }
+    if ( sprite->m_texture ) {
+        delete sprite->m_texture;
+    }
+    delete sprite;
+}
+
 void as::AnimatedSpriteResource::load() {
     as::AnimatedSprite* sprite = (as::AnimatedSprite*)m_data;
     if ( sprite->m_texture == NULL ) {
@@ -29,10 +40,7 @@ void as::AnimatedSpriteResource::load() {
 }
 
 void as::AnimatedSpriteResource::remove() {
-    if ( !m_data ) {
-        return;
-    }
-    delete (as::AnimatedSprite*)m_data;
+    delete (as::AnimatedSpriteResource*)this;
 }
 
 void* as::AnimatedSpriteResource::copy() {

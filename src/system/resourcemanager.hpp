@@ -13,6 +13,7 @@ class Resource {
 public:
                     Resource();
                     Resource( std::string name, void* data = NULL );
+    virtual         ~Resource();
     std::string     m_name;
     void*           m_data;
     virtual void    load();

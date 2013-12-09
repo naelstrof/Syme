@@ -10,6 +10,9 @@ as::Resource::Resource( std::string name, void* data ) :
     m_data( data ) {
 }
 
+as::Resource::~Resource() {
+}
+
 void as::Resource::load() {
     // Do nothing since we're supposed to be polymorphed
     //if ( m_data ) {

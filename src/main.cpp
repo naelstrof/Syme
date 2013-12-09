@@ -1,7 +1,4 @@
-#include "system/print.hpp"
-#include "game/options.hpp"
-#include "game/config.hpp"
-#include "game/common.hpp"
+#include "engine.hpp"
 
 int main( int argc, char** argv ) {
     // Parse lua configuration first, so command line options override it.
@@ -12,6 +9,6 @@ int main( int argc, char** argv ) {
     while ( common->m_running ) {
         common->tick();
     }
-    delete common;
+    as::cleanUp();
     return 0;
 }

@@ -12,9 +12,9 @@ sf::Vector2f* lua_checkvector( lua_State* l, int narg ) {
     return foo;
 }
 
-void lua_pushvector( lua_State* l, sf::Vector2f* vector ) {
+void lua_pushvector( lua_State* l, sf::Vector2f& vector ) {
     sf::Vector2f* pointer = (sf::Vector2f*)lua_newuserdata( l, sizeof(sf::Vector2f) );
-    memcpy( pointer, vector, sizeof( sf::Vector2f ) );
+    *pointer = vector;
     luaL_getmetatable( l, "Vector" );
     lua_setmetatable( l,-2 );
 }
@@ -59,10 +59,8 @@ int lua_vector__index( lua_State* l ) {
 }
 
 int lua_createvector( lua_State* l ) {
-    sf::Vector2f* Vector = new sf::Vector2f();
-    Vector->x = luaL_checknumber( l, 1 );
-    Vector->y = luaL_checknumber( l, 2 );
-    lua_pushvector( l, Vector );
+    sf::Vector2f vector( luaL_checknumber( l, 1 ), luaL_checknumber( l, 2 ) );
+    lua_pushvector( l, vector );
     return 1;
 }
 

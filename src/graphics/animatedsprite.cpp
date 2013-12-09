@@ -24,12 +24,6 @@ as::AnimatedSprite::AnimatedSprite( as::AnimatedSprite* ref ) {
     m_animations = ref->m_animations;
 }
 
-as::AnimatedSprite::~AnimatedSprite() {
-    if ( m_texture ) {
-        delete m_texture;
-    }
-}
-
 void as::AnimatedSprite::addAnimation( as::Animation* animation ) {
     m_animations.push_back( *animation );
     if ( m_currentAnimation == NULL ) {

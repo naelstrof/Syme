@@ -22,7 +22,6 @@ private:
     sf::Time    m_deltaTime;
 public:
                 Common();
-                ~Common();
     int         init();
     void        tick();
     bool        m_running;

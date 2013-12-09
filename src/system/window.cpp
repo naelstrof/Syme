@@ -14,6 +14,10 @@ as::Window::Window() {
     m_window = new sf::RenderWindow();
 }
 
+as::Window::~Window() {
+    delete m_window;
+}
+
 int as::Window::init() {
     // First figure out what kind of mode we're in.
     switch ( m_videoMode ) {

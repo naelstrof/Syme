@@ -11,6 +11,9 @@ as::FontResource::~FontResource() {
     if ( m_filedata ) {
         delete[] m_filedata;
     }
+    if ( m_data ) {
+        delete (sf::Font*)m_data;
+    }
 }
 
 void as::FontResource::load() {
@@ -37,10 +40,7 @@ void as::FontResource::load() {
 }
 
 void as::FontResource::remove() {
-    if ( !m_data ) {
-        return;
-    }
-    delete (sf::Font*)m_data;
+    delete (as::FontResource*)this;
 }
 
 void* as::FontResource::copy() {

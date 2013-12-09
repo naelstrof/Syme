@@ -8,10 +8,12 @@ namespace as {
 
 class Animation {
 public:
-    std::vector<sf::IntRect>    m_frames;
+    Animation( std::string name, float fps, bool loop );
+    void addFrame( sf::IntRect intrect );
     std::string                 m_name;
-    bool                        m_loop;
     float                       m_fps;
+    bool                        m_loop;
+    std::vector<sf::IntRect>    m_frames;
 };
 
 };

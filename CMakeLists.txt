@@ -58,6 +58,7 @@ set( source
      src/game/config.cpp
      src/graphics/animatedsprite.cpp
      src/graphics/scene.cpp
+     src/graphics/animation.cpp
      src/graphics/resource/animatedsprite.cpp
      src/graphics/resource/font.cpp
      src/graphics/lua/animatedsprite.cpp
