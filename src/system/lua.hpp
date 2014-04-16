@@ -19,6 +19,7 @@
 #include "lua/intrect.hpp"
 #include "lua/time.hpp"
 #include "lua/vector.hpp"
+#include "lua/statemachine.hpp"
 
 // Here we define our own lua dostring function that properly registers file location for error messages.
 #define luaL_asdostring( l, s, n ) \

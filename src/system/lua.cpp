@@ -24,6 +24,7 @@ int as::Lua::init() {
     lua_registeranimatedsprite( m_l );
     lua_registerfont( m_l );
     lua_registerscene( m_l );
+    lua_registerstatemachine( m_l );
 
     return 0;
 }

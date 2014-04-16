@@ -10,6 +10,8 @@
 
 namespace as {
 
+class State;
+
 class StateMachine {
 public:
                             StateMachine();

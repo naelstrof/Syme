@@ -51,6 +51,15 @@ int lua_animatedsprite__gc( lua_State* l ) {
     return 0;
 }
 
+int lua_animatedsprite_remove( lua_State* l ) {
+    as::AnimatedSprite* animatedsprite = lua_toanimatedsprite( l, 1 );
+    if ( animatedsprite == NULL ) {
+        return lua->error( l, "attempt to index a NULL AnimatedSprite!" );
+    }
+    scene->remove( animatedsprite );
+    return 0;
+}
+
 int lua_animatedsprite__index( lua_State* l ) {
     as::AnimatedSprite* animatedsprite = lua_toanimatedsprite( l, 1 );
     if ( animatedsprite == NULL ) {
@@ -136,7 +145,7 @@ int lua_registeranimatedsprite( lua_State* l ) {
         { "__newindex", lua_animatedsprite__newindex },
         { "__index", lua_animatedsprite__index },
         { "__gc", lua_animatedsprite__gc },
-        { "remove", lua_animatedsprite__gc },
+        { "remove", lua_animatedsprite_remove },
         { "getPos", lua_animatedsprite_getPos },
         { "setPos", lua_animatedsprite_setPos },
         { "move", lua_animatedsprite_move },

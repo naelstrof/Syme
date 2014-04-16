@@ -19,6 +19,7 @@ void                    lua_pushanimatedsprite( lua_State* l, as::AnimatedSprite
 int                     lua_animatedsprite__newindex( lua_State* l );
 int                     lua_animatedsprite__index( lua_State* l );
 int                     lua_animatedsprite__gc( lua_State* l );
+int                     lua_animatedsprite_remove( lua_State* l );
 int                     lua_animatedsprite_setPos( lua_State* l );
 int                     lua_animatedsprite_getPos( lua_State* l );
 int                     lua_animatedsprite_move( lua_State* l );
