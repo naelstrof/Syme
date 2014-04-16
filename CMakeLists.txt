@@ -69,12 +69,13 @@ set( source
      src/system/lua/time.cpp
      src/system/lua/vector.cpp
      src/system/lua/print.cpp
+     src/system/state.cpp
+     src/system/lua/statemachine.cpp
      src/system/filesystem.cpp
      src/system/fileread.cpp
      src/system/print.cpp
      src/system/lua.cpp
      src/system/window.cpp
-     src/system/state.cpp
      src/system/statemachine.cpp
      src/system/resourcemanager.cpp
      src/main.cpp )
@@ -97,7 +98,7 @@ add_executable( ${BIN_TARGET} ${source} )
 
 # Libraries
 target_link_libraries( ${BIN_TARGET}
-                       ${LUA_LIBRARIES}
+                       /usr/lib64/liblua.so
                        ${SFML_LIBRARY}
                        ${OPENGL_LIBRARIES}
                        ${PHYSFS_LIBRARY} )
